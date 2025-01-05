@@ -3,6 +3,12 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { CAFE24_CLIENT_ID } from '$env/static/private';
 import { error, redirect } from '@sveltejs/kit'
 
+const scopes = [
+	'mall.read_application',
+	'mall.write_application',
+	'mall.read_product',
+];
+
 export const GET: RequestHandler = ({ url }) => {
 	const params = url.searchParams
 	const state = params.get('state')
@@ -34,6 +40,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			client_id: CAFE24_CLIENT_ID,
 			state: 'install',
 			redirect_uri: request.url,
+			scope: scopes.join(','),
 		}).toString())
 
 	throw redirect(302, to)
