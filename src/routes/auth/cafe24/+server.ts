@@ -11,19 +11,18 @@ const scopes = [
 
 export const GET: RequestHandler = ({ url }) => {
 	const params = url.searchParams
-	const state = params.get('state')
 
-	if (state !== 'install') {
-		return new Response(JSON.stringify({
-			code: params.get('code'),
-		}), {
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
+	if (params.get('state') !== 'install') {
+		throw error(400, 'invalid params: state');
 	}
 
-	return new Response();
+	return new Response(JSON.stringify({
+		code: params.get('code'),
+	}), {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
 };
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -31,7 +30,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const id = data.get('id')
 	if (!id) {
-		throw error(400, 'id 파라미터가 필요합니다.');
+		throw error(400, 'invalid params: id');
 	}
 
 	const to = `https://${id}.cafe24api.com/api/v2/oauth/authorize?`+
