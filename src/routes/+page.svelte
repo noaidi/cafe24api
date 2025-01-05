@@ -19,12 +19,7 @@
 	</h1>
 
 	<form action="/auth/cafe24" method="post">
-		<div>
-			<input type="text" name="id" />
-		</div>
-		<div>
-			<button type="submit"> Install </button>
-		</div>
+		<button type="submit">Install</button>
 	</form>
 </section>
 
