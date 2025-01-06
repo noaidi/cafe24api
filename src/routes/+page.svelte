@@ -19,7 +19,7 @@
 	</h1>
 
 	<form action="/auth/cafe24" method="post">
-		<button type="submit">Install</button>
+		<button type="submit">Login</button>
 	</form>
 </section>
 
